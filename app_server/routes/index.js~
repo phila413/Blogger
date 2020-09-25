@@ -1,0 +1,16 @@
+var express = require('express');
+var router = express.Router();
+var ctrlHome = require('../controllers/home');
+var ctrlBlog = require('../controllers/blog');
+
+/* GET home page. */
+router.get('/', ctrlHome.home);
+
+/* GET blog page. */
+router.get('/blogList', ctrlBlog.list);
+router.get('/blogAdd', ctrlBlog.add);
+router.get('/blogEdit/5564b6c11de315e733f173cf', ctrlBlog.edit);
+router.get('/blogDelete/5564b6c11de315e733f173cf', ctrlBlog.del);
+
+
+module.exports = router;
