@@ -29,12 +29,11 @@
           for(let i = 0; i < blogs.length; i++) {
             blog = blogs[i]
             %>
-            <p> <%= JSON.stringify(blog) %> </p>
             <div class="card border-primary" style="width: 50%"> 
               <div class="card-header">
               </div>
               <div class="card-body">
-                  <h5 class ="card-title"><%= blog.blogText %></h5>
+                  <h5 class ="card-title"><%= blog.blogText %></h5><%= blog.date %>
               </div>
               <div class="card-footer">
                 <div class = "col-sm">
@@ -43,7 +42,7 @@
                       <a class="nav-link" href="/blogEdit/<%= blog._id %>"> <i class="fas fa-edit"></i></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/blogDelete"> <i class="fas fa-trash-alt"></i></a>
+                      <a class="nav-link" href="/blogDelete/<%= blog._id %>"> <i class="fas fa-trash-alt"></i></a>
                     </li>
                   </ul>
                 </div>  

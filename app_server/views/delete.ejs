@@ -19,15 +19,15 @@
 </nav>
       <p></p>
         <div class="card border-primary" style="width: 50%">
-          <form name="userForm" ng-submit="vm.submit()" ng-controller="DeleteController" style="padding: 20px">    
+          <form name="userForm" method="POST" action="/blogDelete/<%= blogs._id %>" ng-submit="vm.submit()" ng-controller="DeleteController" style="padding: 20px">    
             <div class="form-group">
                 <label for="summary" class="text-primary">Blog Title</label>
-                <input readonly class="form-control" id="blogTitle" name="blogTitle" value="<%= blog.blogTitle %>">
+                <input readonly class="form-control" id="blogTitle" name="blogTitle" value="<%= blogs.blogTitle %>">
                 <label for="detail" class="text-primary">Blog Text</label>
-                <textarea readonly class="form-control" id="blogText" name="blogText" rows="3"><%= vm.blog.blogText %></textarea>
+                <textarea readonly class="form-control" id="blogText" name="blogText" rows="3"><%= blogs.blogText %></textarea>
             </div>
                <input type="submit" class="btn btn-danger float-right" value="Delete Blog">
-               <button ng-click="vm.cancel()" ng-controller="DeleteController" class="btn btn-primary float-right" style="margin-right: 25px">Cancel</button>
+               <button onclick="location.href='http://3.86.188.3/blogList'" type="button" ng-click="vm.cancel()" ng-controller="DeleteController" class="btn btn-primary float-right" style="margin-right: 25px">Cancel</button>
           </form>
         </div>
     </div> <!-- container -->  

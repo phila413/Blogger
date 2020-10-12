@@ -18,66 +18,42 @@
         </div>
       </nav>
       <p></p>
-      <div class="card border-primary" style="width: 50%"> 
-        <div class="card-header">
-        </div>
-        <div class="card-body">
-            <h5 class ="card-title"><%= blogs[0].blogText %></h5>
-        </div>
-        <div class="card-footer">
-            <div class = "col-sm">
-               <ul class="nav justify-content-end nav-pills card-header-pills">
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogEdit/5564b6c11de315e733f173cf"> <i class="fa fa-edit"></i></a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogDelete/5564b6c11de315e733f173cf"> <i class="fa fa-trash-alt"></i></a>
-                 </li>
-               </ul>
-          </div>  
-        </div>
-      </div>
-      <p></p>
-      <div class="card border-primary" style="width: 50%"> 
-        <div class="card-header">
-        </div>
-        <div class="card-body">
-            <h5 class ="card-title"><%= blogs[1].blogText %></h5>
-        </div>
-        <div class="card-footer">
-            <div class = "col-sm">
-               <ul class="nav justify-content-end nav-pills card-header-pills">
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogEdit/5564b6c11de315e733f173cf"> <i class="fas fa-edit"></i></a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogDelete/5564b6c11de315e733f173cf"> <i class="fas fa-trash-alt"></i></a>
-                 </li>
-               </ul>
-          </div>  
-        </div>
-      </div>
-      <p></p>
-      <div class="card border-primary" style="width: 50%"> 
-        <div class="card-header">
-        </div>
-        <div class="card-body">
-            <h5 class ="card-title"><%= blogs[2].blogText %></h5>
-        </div>
-        <div class="card-footer">
-            <div class = "col-sm">
-               <ul class="nav justify-content-end nav-pills card-header-pills">
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogEdit/5564b6c11de315e733f173cf"> <i class="fas fa-edit"></i></a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="/blogDelete/5564b6c11de315e733f173cf"> <i class="fas fa-trash-alt"></i></a>
-                 </li>
-               </ul>
-          </div>  
-        </div>
-      </div>
-      <p></p>
+      
+        <% 
+        let blog = {};
+        if (blogs.length == 0) {
+        %>
+          <h4> No blogs to display.  Add on above.</h4>
+        <%
+        } else {
+          for(let i = 0; i < blogs.length; i++) {
+            blog = blogs[i]
+            %>
+            <div class="card border-primary" style="width: 50%"> 
+              <div class="card-header">
+              </div>
+              <div class="card-body">
+                  <h5 class ="card-title"><%= blog.blogText %></h5>
+              </div>
+              <div class="card-footer">
+                <div class = "col-sm">
+                  <ul class="nav justify-content-end nav-pills card-header-pills">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/blogEdit/<%= blog._id %>"> <i class="fas fa-edit"></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/blogDelete/<%= blog._id %>"> <i class="fas fa-trash-alt"></i></a>
+                    </li>
+                  </ul>
+                </div>  
+              </div>
+            </div>
+            <p></p>
+            <%
+          }
+        }
+        %>
+      
     </div>
   </body>
   <script src="/js/jquery.min.js"></script>

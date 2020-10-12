@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-require('./app_server/models/db');
+require('./app_api/models/db');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
+var indexApi = require ('./app_api/routes/index');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/js', express.static(__dirname + '/node_modules/angular'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 app.use('/font-awesome', express.static(__dirname + '/node_modules/font-awesome/css')); // redirect CSS bootstrap 
 app.use('/css', express.static(__dirname + '/public/stylesheets'));
@@ -30,6 +32,7 @@ app.use('/webfonts', express.static(__dirname + '/public/fonts/webfonts/'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api', indexApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
