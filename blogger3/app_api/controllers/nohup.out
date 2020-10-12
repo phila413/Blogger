@@ -1,0 +1,29 @@
+
+> blogger@0.0.0 start /home/bitnami/blogger3
+> node ./bin/www
+
+Mongoose connected to mongodb://blogger:406blogger@localhost/test
+[
+  {
+    date: '10/12/2020, 5:27:08 PM',
+    _id: 5f84c83f744b302c4afc5510,
+    blogTitle: 'First Blog',
+    blogText: 'This is my first blog',
+    __v: 0
+  },
+  {
+    date: '10/12/2020, 5:19:06 PM',
+    _id: 5f84c84a744b302c4afc5511,
+    blogTitle: 'Second Blog',
+    blogText: 'This is my second blog',
+    __v: 0
+  }
+]
+[0mGET /api/blogs [32m200 [0m30.310 ms - 257[0m
+[0mGET /blogList [32m200 [0m53.353 ms - 2758[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.321 ms - 111[0m
+[0mGET /js/jquery.min.js [36m304 [0m2.263 ms - -[0m
+[0mGET /js/bootstrap.min.js [36m304 [0m0.580 ms - -[0m
+[0mGET /css/fontawesome-all.css [32m200 [0m3.154 ms - 54812[0m
+[0mGET /css/bootstrap.min.css [32m200 [0m3.439 ms - 160302[0m
+[0mGET /favicon.ico [33m404 [0m1.628 ms - 1482[0m
