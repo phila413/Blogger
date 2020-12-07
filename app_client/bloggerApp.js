@@ -100,6 +100,10 @@ function updateBlogFromId($http, authentication, id, data) {
     return $http.put('/api/blogs/' + id, data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }} );
 }
 
+function updateCommentNumFromId($http, authentication, id, data) {
+    return $http.put('/api/blogs/' + id + '/num', data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }} );
+}
+
 function addBlog($http, authentication, data) {
     return $http.post('/api/blogs/', data, { headers: { Authorization: 'Bearer ' + authentication.getToken() }} );
 }
@@ -264,8 +268,19 @@ app.controller('commentBlog', [ '$http', '$scope', '$interval', '$routeParams', 
         data.name = authentication.currentUser().name;
         data.blogid = vm.blog._id;
         data.email = authentication.currentUser().email;
+
         addComment($http, authentication, data, vm.id)
         	.success( function(data) {
+        		var data = vm.blog;
+        		data.commentNum = ++vm.blog.commentNum;
+
+				updateCommentNumFromId($http, authentication, vm.id, data)
+					.success(function(data) {
+						vm.message = "Blog data updated!";
+					})
+					.error(function (e) {
+						vm.message = "Could not update blog!";
+					});
             	vm.message = "Comment data added!";
             	$state.go('blogList');
          	})
@@ -309,6 +324,16 @@ app.controller('deleteComment', [ '$http', '$routeParams', '$state', 'authentica
 
         deleteComment($http, vm.commentid, authentication)
         	.success(function(data) {
+        		var data = vm.blog;
+        		data.commentNum = --vm.blog.commentNum;
+
+				updateCommentNumFromId($http, authentication, vm.blogid, data)
+					.success(function(data) {
+						vm.message = "Blog data updated!";
+					})
+					.error(function (e) {
+						vm.message = "Could not update blog!";
+					});
         		vm.message = "Comment data deleted!";
         		$state.go('blogList');
         	})

@@ -19,6 +19,7 @@ router.get('/blogs/:blogid', ctrlApi.singleBlog);
 router.post('/blogs', auth, ctrlApi.addBlog);        //added auth
 router.put('/blogs/:blogid', auth, ctrlApi.updateBlog);  //added auth
 router.delete('/blogs/:blogid', auth, ctrlApi.deleteBlog); //added auth
+router.put('/blogs/:blogid/num', auth, ctrlApi.updateCommentNum);
 
 router.get('/comments/:blogid', ctrlApi.fullCommentList);
 router.get('/comments/:blogid/:commentid', ctrlApi.singleComment);

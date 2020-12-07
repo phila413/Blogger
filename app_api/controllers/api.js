@@ -17,7 +17,8 @@ var buildBlogList = function(req, res, test) {
 	    blogText: obj.blogText,
 	    date: obj.date,
 	    email: obj.email,
-	    name: obj.name
+	    name: obj.name,
+		commentNum: obj.commentNum
 	});
     });
     return blogs;
@@ -52,11 +53,9 @@ var buildCommentList = function(req, res, test, id) {
 };
 
 module.exports.allUsers = function (req, res) {
-	console.log("test");
     User
         .find()
         .exec(function(err, test) {
-        	console.log("tes2t");
 	    	if (!test) {
 				sendJsonResponse(res, 404, {"message": "no blogs found"});
 				return;
@@ -252,7 +251,8 @@ module.exports.addBlog = function (req, res){
 	blogText: req.body.blogText,
 	date: req.body.date,
 	email: req.body.email,
-	name: req.body.name
+	name: req.body.name,
+	commentNum: 0
     }, function(err, test) {
 	if (err) {
 	    sendJsonResponse(res, 400, err);
@@ -285,6 +285,42 @@ module.exports.updateBlog = function (req, res){
 		test.blogTitle = req.body.blogTitle;
 		test.blogText = req.body.blogText;
 		test.date = req.body.date;
+
+		test.save(function (err, test) {
+		    if(err) {
+			sendJsonResponse(res, 404, err);
+		    } else {
+			sendJsonResponse(res, 200, test);
+		    }
+		});
+	    }
+	);
+};
+
+module.exports.updateCommentNum = function (req, res){
+	console.log("hello");
+	console.log(req.params.blogid);
+    if(!req.params.blogid) {
+	sendJsonResponse(res, 404, {
+	    "message": "Not found, blogid is required"
+	});
+	return;
+    }
+    Blog
+        .findById(req.params.blogid)
+        .exec(
+	    function(err, test) {
+		if(!test) {
+		    sendJsonResponse(res, 404, {
+			"message": "blogid not found"
+		    });
+		    return;
+		} else if (err) {
+		    sendJsonResponse(res, 400, err);
+		    return;
+		}
+		test.commentNum = req.body.commentNum;
+		console.log("hello2");
 		test.save(function (err, test) {
 		    if(err) {
 			sendJsonResponse(res, 404, err);
